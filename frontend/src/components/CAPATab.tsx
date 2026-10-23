@@ -64,25 +64,23 @@ export const CAPATab: React.FC = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* CAPA Header Banner */}
       <div
+        className="ws-card"
         style={{
-          background: 'rgba(30, 41, 59, 0.4)',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-md)',
-          padding: '16px 20px',
+          padding: '18px 24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ background: 'rgba(16, 185, 129, 0.2)', padding: '10px', borderRadius: '8px', color: '#34d399' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ background: 'var(--success-bg)', border: '1px solid var(--success-border)', padding: '10px', borderRadius: 'var(--radius-md)', color: 'var(--success-text)' }}>
             <CheckSquare size={22} />
           </div>
           <div>
-            <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)' }}>
+            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>
               Corrective and Preventive Action (CAPA) Plan
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
               ICH Q10 Pharmaceutical Quality System • Root Cause Remediation & Recurrence Prevention
             </div>
           </div>
@@ -99,21 +97,20 @@ export const CAPATab: React.FC = () => {
       {showAddModal && (
         <form
           onSubmit={handleCreateCapa}
+          className="ws-card"
           style={{
-            background: 'rgba(30, 41, 59, 0.65)',
-            border: '1px solid var(--border-medium)',
-            borderRadius: 'var(--radius-md)',
-            padding: '20px',
+            padding: '22px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '14px',
+            gap: '16px',
+            background: 'rgba(25, 34, 58, 0.7)',
           }}
         >
-          <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#ffffff' }}>
+          <div style={{ fontSize: '0.94rem', fontWeight: 700, color: '#ffffff' }}>
             New CAPA Assignment
           </div>
 
-          <div className="grid-3">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '12px' }}>
             <div className="form-group">
               <label className="form-label">CAPA Type</label>
               <select className="form-select" value={capaType} onChange={(e) => setCapaType(e.target.value as any)}>
@@ -122,7 +119,7 @@ export const CAPATab: React.FC = () => {
               </select>
             </div>
 
-            <div className="form-group" style={{ gridColumn: 'span 2' }}>
+            <div className="form-group">
               <label className="form-label">Action Title</label>
               <input
                 type="text"
@@ -137,7 +134,7 @@ export const CAPATab: React.FC = () => {
           <div className="form-group">
             <label className="form-label">Detailed Implementation Instructions</label>
             <textarea
-              className="textarea-clean"
+              className="form-input"
               rows={3}
               placeholder="Detailed step-by-step technical implementation instructions..."
               value={description}
@@ -145,7 +142,7 @@ export const CAPATab: React.FC = () => {
             />
           </div>
 
-          <div className="grid-3">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
             <div className="form-group">
               <label className="form-label">Action Owner</label>
               <input
@@ -190,7 +187,7 @@ export const CAPATab: React.FC = () => {
             />
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
             <button type="button" className="btn btn-secondary btn-sm" onClick={() => setShowAddModal(false)}>
               Cancel
             </button>
@@ -202,9 +199,9 @@ export const CAPATab: React.FC = () => {
       )}
 
       {/* Corrective Actions Section */}
-      <div className="form-card">
-        <div className="card-title-bar">
-          <div className="card-title">
+      <div className="ws-card">
+        <div className="ws-card-header">
+          <div className="ws-card-title">
             <Shield size={18} color="#38bdf8" />
             <span>1. Corrective Actions (Immediate Remediation & Batch Containment)</span>
           </div>
@@ -212,7 +209,7 @@ export const CAPATab: React.FC = () => {
         </div>
 
         {correctiveItems.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '24px', color: 'var(--text-dim)', fontSize: '0.85rem' }}>
+          <div style={{ textAlign: 'center', padding: '28px', color: 'var(--text-dim)', fontSize: '0.86rem' }}>
             No corrective actions defined.
           </div>
         ) : (
@@ -221,13 +218,17 @@ export const CAPATab: React.FC = () => {
               <div
                 key={item.id}
                 style={{
-                  background: 'rgba(15, 23, 42, 0.6)',
-                  border: '1px solid var(--border-subtle)',
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  backdropFilter: 'var(--glass-blur)',
+                  WebkitBackdropFilter: 'var(--glass-blur)',
+                  border: '1px solid var(--glass-border)',
+                  borderTop: '1px solid var(--glass-border-top)',
                   borderRadius: 'var(--radius-md)',
-                  padding: '16px 20px',
+                  padding: '18px 20px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '10px',
+                  gap: '12px',
+                  transition: 'all 0.2s ease',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -235,7 +236,7 @@ export const CAPATab: React.FC = () => {
                     <span className="badge badge-minor">Corrective</span>
                     <strong style={{ fontSize: '0.92rem', color: '#ffffff' }}>{item.title}</strong>
                     {item.ai_suggested && (
-                      <span className="badge badge-ai" style={{ fontSize: '0.65rem' }}>
+                      <span className="badge badge-neutral" style={{ fontSize: '0.68rem', color: 'var(--accent-light)' }}>
                         <Sparkles size={11} /> AI Suggested
                       </span>
                     )}
@@ -244,7 +245,7 @@ export const CAPATab: React.FC = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <select
                       className="form-select"
-                      style={{ padding: '4px 8px', fontSize: '0.72rem' }}
+                      style={{ padding: '4px 10px', fontSize: '0.74rem' }}
                       value={item.status}
                       onChange={(e) =>
                         dispatch(updateCAPAItem({ id: item.id, field: 'status', value: e.target.value }))
@@ -258,7 +259,7 @@ export const CAPATab: React.FC = () => {
 
                     <button
                       className="btn-icon"
-                      style={{ color: '#ef4444' }}
+                      style={{ color: 'var(--critical-text)' }}
                       onClick={() => dispatch(removeCAPAItem(item.id))}
                       title="Delete"
                     >
@@ -267,7 +268,7 @@ export const CAPATab: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: '1.5' }}>
+                <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                   {item.description}
                 </div>
 
@@ -284,14 +285,14 @@ export const CAPATab: React.FC = () => {
                   <strong>Effectiveness Check Criteria:</strong> {item.effectiveness_criteria}
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px', fontSize: '0.74rem', color: 'var(--text-dim)', paddingTop: '6px', borderTop: '1px solid rgba(255, 255, 255, 0.04)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '20px', fontSize: '0.75rem', color: 'var(--text-dim)', paddingTop: '8px', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <User size={13} />
-                    <span>Owner: <strong>{item.owner}</strong></span>
+                    <span>Owner: <strong style={{ color: '#ffffff' }}>{item.owner}</strong></span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Calendar size={13} />
-                    <span>Target Date: <strong>{item.target_date || '14 Days'}</strong></span>
+                    <span>Target Date: <strong style={{ color: '#ffffff' }}>{item.target_date || '14 Days'}</strong></span>
                   </div>
                   {item.root_cause_addressed && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -307,9 +308,9 @@ export const CAPATab: React.FC = () => {
       </div>
 
       {/* Preventive Actions Section */}
-      <div className="form-card">
-        <div className="card-title-bar">
-          <div className="card-title">
+      <div className="ws-card">
+        <div className="ws-card-header">
+          <div className="ws-card-title">
             <ShieldCheck size={18} color="#10b981" />
             <span>2. Preventive Actions (Systemic Engineering & Process Controls)</span>
           </div>
@@ -317,7 +318,7 @@ export const CAPATab: React.FC = () => {
         </div>
 
         {preventiveItems.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '24px', color: 'var(--text-dim)', fontSize: '0.85rem' }}>
+          <div style={{ textAlign: 'center', padding: '28px', color: 'var(--text-dim)', fontSize: '0.86rem' }}>
             No preventive actions defined.
           </div>
         ) : (
@@ -326,13 +327,17 @@ export const CAPATab: React.FC = () => {
               <div
                 key={item.id}
                 style={{
-                  background: 'rgba(15, 23, 42, 0.6)',
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  backdropFilter: 'var(--glass-blur)',
+                  WebkitBackdropFilter: 'var(--glass-blur)',
                   border: '1px solid rgba(16, 185, 129, 0.25)',
+                  borderTop: '1px solid var(--glass-border-top)',
                   borderRadius: 'var(--radius-md)',
-                  padding: '16px 20px',
+                  padding: '18px 20px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '10px',
+                  gap: '12px',
+                  transition: 'all 0.2s ease',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -340,7 +345,7 @@ export const CAPATab: React.FC = () => {
                     <span className="badge badge-success">Preventive</span>
                     <strong style={{ fontSize: '0.92rem', color: '#ffffff' }}>{item.title}</strong>
                     {item.ai_suggested && (
-                      <span className="badge badge-ai" style={{ fontSize: '0.65rem' }}>
+                      <span className="badge badge-neutral" style={{ fontSize: '0.68rem', color: 'var(--accent-light)' }}>
                         <Sparkles size={11} /> AI Suggested
                       </span>
                     )}
@@ -349,7 +354,7 @@ export const CAPATab: React.FC = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <select
                       className="form-select"
-                      style={{ padding: '4px 8px', fontSize: '0.72rem' }}
+                      style={{ padding: '4px 10px', fontSize: '0.74rem' }}
                       value={item.status}
                       onChange={(e) =>
                         dispatch(updateCAPAItem({ id: item.id, field: 'status', value: e.target.value }))
@@ -363,7 +368,7 @@ export const CAPATab: React.FC = () => {
 
                     <button
                       className="btn-icon"
-                      style={{ color: '#ef4444' }}
+                      style={{ color: 'var(--critical-text)' }}
                       onClick={() => dispatch(removeCAPAItem(item.id))}
                       title="Delete"
                     >
@@ -372,7 +377,7 @@ export const CAPATab: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: '1.5' }}>
+                <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                   {item.description}
                 </div>
 
@@ -389,14 +394,14 @@ export const CAPATab: React.FC = () => {
                   <strong>Effectiveness Check Criteria:</strong> {item.effectiveness_criteria}
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px', fontSize: '0.74rem', color: 'var(--text-dim)', paddingTop: '6px', borderTop: '1px solid rgba(255, 255, 255, 0.04)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '20px', fontSize: '0.75rem', color: 'var(--text-dim)', paddingTop: '8px', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <User size={13} />
-                    <span>Owner: <strong>{item.owner}</strong></span>
+                    <span>Owner: <strong style={{ color: '#ffffff' }}>{item.owner}</strong></span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Calendar size={13} />
-                    <span>Target Date: <strong>{item.target_date || '30 Days'}</strong></span>
+                    <span>Target Date: <strong style={{ color: '#ffffff' }}>{item.target_date || '30 Days'}</strong></span>
                   </div>
                   {item.root_cause_addressed && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

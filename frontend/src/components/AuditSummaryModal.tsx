@@ -25,14 +25,14 @@ export const AuditSummaryModal: React.FC<Props> = ({ isOpen, onClose }) => {
       >
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ background: 'rgba(99, 102, 241, 0.2)', padding: '8px', borderRadius: '8px', color: '#818cf8' }}>
+            <div style={{ background: 'var(--accent-subtle)', border: '1px solid var(--accent)', padding: '8px', borderRadius: '8px', color: 'var(--accent-light)' }}>
               <Printer size={20} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff' }}>
                 GMP Root Cause Analysis & CAPA Audit Dossier
               </h3>
-              <p style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+              <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)' }}>
                 Official Regulatory Investigation Record for FDA / EMA Inspection Defense
               </p>
             </div>
@@ -40,7 +40,7 @@ export const AuditSummaryModal: React.FC<Props> = ({ isOpen, onClose }) => {
           <button className="btn-icon" onClick={onClose}><X size={18} /></button>
         </div>
 
-        <div className="modal-body" style={{ overflowY: 'auto', background: '#0a0e17' }}>
+        <div className="modal-body" style={{ overflowY: 'auto', background: 'rgba(15, 20, 35, 0.95)' }}>
           {/* Formal Letterhead */}
           <div
             style={{

@@ -50,41 +50,39 @@ export const EvidenceGapsTab: React.FC = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       {/* Compliance Header Banner */}
       <div
+        className="ws-card"
         style={{
-          background: 'rgba(30, 41, 59, 0.4)',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-md)',
-          padding: '16px 20px',
+          padding: '18px 24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ background: 'rgba(245, 158, 11, 0.2)', padding: '10px', borderRadius: '8px', color: '#fbbf24' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ background: 'var(--major-bg)', border: '1px solid var(--major-border)', padding: '10px', borderRadius: 'var(--radius-md)', color: 'var(--major-text)' }}>
             <ShieldAlert size={22} />
           </div>
           <div>
-            <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)' }}>
+            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>
               Missing Evidence & Regulatory Audit Trail Gaps
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
               Compliance Checklist per FDA 21 CFR 211.192 & ICH Q7 (Required prior to QP batch disposition)
             </div>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '0.82rem', fontWeight: 700, color: pendingCount > 0 ? '#f87171' : '#34d399' }}>
+            <div style={{ fontSize: '0.86rem', fontWeight: 700, color: pendingCount > 0 ? 'var(--critical-text)' : 'var(--success-text)' }}>
               {pendingCount} Pending Gaps
             </div>
-            <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>
+            <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
               {providedCount} Provided
             </div>
           </div>
-          <button className="btn btn-secondary btn-sm" onClick={() => setShowAddModal(true)}>
-            <Plus size={14} /> Add Evidence Requirement
+          <button className="btn btn-primary btn-sm" onClick={() => setShowAddModal(true)}>
+            <Plus size={14} /> Add Requirement
           </button>
         </div>
       </div>
@@ -93,18 +91,17 @@ export const EvidenceGapsTab: React.FC = () => {
       {showAddModal && (
         <form
           onSubmit={handleAddGap}
+          className="ws-card"
           style={{
-            background: 'rgba(30, 41, 59, 0.6)',
-            border: '1px solid var(--border-medium)',
-            borderRadius: 'var(--radius-md)',
-            padding: '18px',
+            padding: '20px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '12px',
+            gap: '14px',
+            background: 'rgba(25, 34, 58, 0.7)',
           }}
         >
-          <div className="grid-3">
-            <div className="form-group" style={{ gridColumn: 'span 2' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '12px' }}>
+            <div className="form-group">
               <label className="form-label">Required Document / Test / Record</label>
               <input
                 type="text"
@@ -124,7 +121,7 @@ export const EvidenceGapsTab: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid-2">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             <div className="form-group">
               <label className="form-label">Source Department</label>
               <input
@@ -147,7 +144,7 @@ export const EvidenceGapsTab: React.FC = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
             <button type="button" className="btn btn-secondary btn-sm" onClick={() => setShowAddModal(false)}>
               Cancel
             </button>
@@ -159,9 +156,9 @@ export const EvidenceGapsTab: React.FC = () => {
       )}
 
       {/* Evidence Gaps List */}
-      <div className="form-card">
-        <div className="card-title-bar">
-          <div className="card-title">
+      <div className="ws-card">
+        <div className="ws-card-header">
+          <div className="ws-card-title">
             <FileCheck2 size={18} color="#f59e0b" />
             <span>Investigation Evidence Registry</span>
           </div>
@@ -171,8 +168,8 @@ export const EvidenceGapsTab: React.FC = () => {
         </div>
 
         {current.missing_evidence.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '32px', color: 'var(--text-dim)', fontSize: '0.85rem' }}>
-            No missing evidence items identified yet. Run Step 4 in the AI Copilot to automatically detect regulatory gaps.
+          <div style={{ textAlign: 'center', padding: '36px', color: 'var(--text-dim)', fontSize: '0.86rem' }}>
+            No missing evidence items identified yet.
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -184,23 +181,28 @@ export const EvidenceGapsTab: React.FC = () => {
                 <div
                   key={gap.id}
                   style={{
-                    background: isProvided ? 'rgba(16, 185, 129, 0.05)' : 'rgba(15, 23, 42, 0.6)',
-                    border: `1px solid ${isProvided ? 'var(--success-border)' : 'var(--border-subtle)'}`,
-                    borderRadius: '8px',
-                    padding: '14px 18px',
+                    background: isProvided ? 'var(--success-bg)' : 'rgba(255, 255, 255, 0.04)',
+                    backdropFilter: 'var(--glass-blur)',
+                    WebkitBackdropFilter: 'var(--glass-blur)',
+                    border: `1px solid ${isProvided ? 'var(--success-border)' : 'var(--glass-border)'}`,
+                    borderTop: `1px solid ${isProvided ? 'var(--success-border)' : 'var(--glass-border-top)'}`,
+                    borderRadius: 'var(--radius-md)',
+                    padding: '16px 20px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: '16px',
+                    transition: 'all 0.2s ease',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', flex: 1 }}>
                     <div
                       style={{
-                        padding: '6px',
-                        borderRadius: '6px',
-                        background: isProvided ? 'rgba(16, 185, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)',
-                        color: isProvided ? '#34d399' : '#fbbf24',
+                        padding: '8px',
+                        borderRadius: 'var(--radius-sm)',
+                        background: isProvided ? 'var(--success-bg)' : 'var(--major-bg)',
+                        border: `1px solid ${isProvided ? 'var(--success-border)' : 'var(--major-border)'}`,
+                        color: isProvided ? 'var(--success-text)' : 'var(--major-text)',
                         marginTop: '2px',
                       }}
                     >
@@ -212,14 +214,14 @@ export const EvidenceGapsTab: React.FC = () => {
                         <span className={`badge badge-${gap.priority.toLowerCase()}`}>
                           {gap.priority} Priority
                         </span>
-                        <strong style={{ fontSize: '0.88rem', color: '#ffffff' }}>{gap.item}</strong>
+                        <strong style={{ fontSize: '0.9rem', color: '#ffffff' }}>{gap.item}</strong>
                       </div>
 
-                      <div style={{ fontSize: '0.78rem', color: '#cbd5e1' }}>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                         <strong>Rationale:</strong> {gap.rationale}
                       </div>
 
-                      <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <Building size={12} />
                         <span>Source Department: {gap.source_department || 'QC / Operations'}</span>
                       </div>
@@ -227,15 +229,14 @@ export const EvidenceGapsTab: React.FC = () => {
                   </div>
 
                   {/* Status Toggle Buttons */}
-                  <div style={{ display: 'flex', gap: '6px' }}>
+                  <div style={{ display: 'flex', gap: '8px' }}>
                     <button
                       className="btn btn-sm"
                       style={{
-                        background: isProvided ? 'rgba(16, 185, 129, 0.25)' : 'rgba(30, 41, 59, 0.6)',
-                        color: isProvided ? '#34d399' : 'var(--text-muted)',
-                        borderColor: isProvided ? 'var(--success-border)' : 'var(--border-subtle)',
-                        fontSize: '0.72rem',
-                        padding: '5px 10px',
+                        background: isProvided ? 'var(--success-bg)' : 'rgba(255, 255, 255, 0.06)',
+                        color: isProvided ? 'var(--success-text)' : 'var(--text-secondary)',
+                        borderColor: isProvided ? 'var(--success-border)' : 'var(--glass-border)',
+                        fontSize: '0.74rem',
                       }}
                       onClick={() =>
                         dispatch(updateEvidenceGapStatus({ id: gap.id, status: isProvided ? 'Pending' : 'Provided' }))
@@ -247,11 +248,10 @@ export const EvidenceGapsTab: React.FC = () => {
                     <button
                       className="btn btn-sm"
                       style={{
-                        background: gap.status === 'Waived' ? 'rgba(148, 163, 184, 0.25)' : 'transparent',
+                        background: gap.status === 'Waived' ? 'rgba(148, 163, 184, 0.2)' : 'transparent',
                         color: gap.status === 'Waived' ? '#cbd5e1' : 'var(--text-dim)',
-                        borderColor: 'var(--border-subtle)',
-                        fontSize: '0.72rem',
-                        padding: '5px 8px',
+                        borderColor: 'var(--glass-border)',
+                        fontSize: '0.74rem',
                       }}
                       onClick={() =>
                         dispatch(updateEvidenceGapStatus({ id: gap.id, status: gap.status === 'Waived' ? 'Pending' : 'Waived' }))

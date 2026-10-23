@@ -51,14 +51,14 @@ export const QPSignoffModal: React.FC<Props> = ({ isOpen, onClose }) => {
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ background: 'rgba(16, 185, 129, 0.2)', padding: '8px', borderRadius: '8px', color: '#34d399' }}>
+            <div style={{ background: 'var(--success-bg)', border: '1px solid var(--success-border)', padding: '8px', borderRadius: '8px', color: 'var(--success-text)' }}>
               <ShieldCheck size={22} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff' }}>
                 Qualified Person (QP) Electronic Sign-Off
               </h3>
-              <p style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+              <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)' }}>
                 cGMP Compliance & 21 CFR Part 11 Electronic Signature
               </p>
             </div>
@@ -69,33 +69,33 @@ export const QPSignoffModal: React.FC<Props> = ({ isOpen, onClose }) => {
         <div className="modal-body">
           <div
             style={{
-              padding: '12px 14px',
-              borderRadius: '8px',
-              background: 'rgba(15, 23, 42, 0.8)',
-              border: '1px solid var(--border-subtle)',
+              padding: '14px 16px',
+              borderRadius: 'var(--radius-md)',
+              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid var(--glass-border)',
               fontSize: '0.82rem',
               display: 'flex',
               flexDirection: 'column',
               gap: '6px',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-dim)' }}>
               <span>Deviation ID:</span>
-              <strong style={{ color: 'var(--text-main)' }}>{current.deviation_number}</strong>
+              <strong style={{ color: '#ffffff' }}>{current.deviation_number}</strong>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-dim)' }}>
               <span>Product & Batch:</span>
-              <strong style={{ color: 'var(--text-main)' }}>{current.product_name} ({current.batch_number})</strong>
+              <strong style={{ color: '#ffffff' }}>{current.product_name} ({current.batch_number})</strong>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-dim)' }}>
               <span>Verified Root Cause:</span>
-              <span style={{ color: '#fca5a5', maxWidth: '340px', textAlign: 'right', fontSize: '0.75rem' }}>
+              <span style={{ color: 'var(--critical-text)', maxWidth: '340px', textAlign: 'right', fontSize: '0.75rem' }}>
                 {current.suspected_root_cause || 'Root cause under investigation'}
               </span>
             </div>
           </div>
 
-          <div className="grid-2">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             <div className="form-group">
               <label className="form-label">Signer Full Name</label>
               <input
@@ -119,14 +119,14 @@ export const QPSignoffModal: React.FC<Props> = ({ isOpen, onClose }) => {
           <div className="form-group">
             <label className="form-label">Regulatory Review Comments & Disposition Justification</label>
             <textarea
-              className="textarea-clean"
+              className="form-input"
               rows={3}
               value={comments}
               onChange={(e) => setComments(e.target.value)}
             />
           </div>
 
-          <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', fontStyle: 'italic' }}>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', fontStyle: 'italic', lineHeight: '1.4' }}>
             By clicking "Affix Electronic Signature", I confirm under penalty of cGMP regulatory sanction that the root cause analysis has been verified with objective evidence and the CAPA plan meets ICH Q10 standards.
           </div>
         </div>
@@ -135,7 +135,7 @@ export const QPSignoffModal: React.FC<Props> = ({ isOpen, onClose }) => {
           <button className="btn btn-secondary btn-sm" onClick={onClose}>
             Cancel
           </button>
-          <button className="btn btn-success btn-sm" onClick={handleSign} disabled={!signerName.trim()}>
+          <button className="btn btn-primary btn-sm" onClick={handleSign} disabled={!signerName.trim()}>
             <UserCheck size={16} /> Affix Electronic Signature
           </button>
         </div>

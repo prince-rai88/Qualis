@@ -133,10 +133,11 @@ export const WorkspaceView: React.FC<Props> = ({
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Primary Root Cause Highlight Banner */}
             <div
+              className="ws-card"
               style={{
-                background: 'rgba(239, 68, 68, 0.05)',
-                border: '1px solid var(--critical-border)',
-                borderRadius: 'var(--radius-md)',
+                background: 'rgba(244, 63, 94, 0.07)',
+                borderColor: 'var(--critical-border)',
+                boxShadow: '0 0 30px rgba(244, 63, 94, 0.12), var(--glass-shadow)',
                 padding: '20px 24px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -147,7 +148,7 @@ export const WorkspaceView: React.FC<Props> = ({
                 <AlertOctagon size={16} />
                 <span>Primary Systemic Root Cause (ICH Q7 § 12.2)</span>
               </div>
-              <p style={{ fontSize: '0.92rem', color: '#ffffff', lineHeight: '1.6' }}>
+              <p style={{ fontSize: '0.94rem', color: '#ffffff', lineHeight: '1.6' }}>
                 {current.suspected_root_cause || 'Root cause investigation in progress.'}
               </p>
             </div>
@@ -204,14 +205,14 @@ export const WorkspaceView: React.FC<Props> = ({
                 <form
                   onSubmit={handleAddContainment}
                   style={{
-                    background: 'var(--bg-elevated)',
-                    border: '1px solid var(--border-medium)',
-                    borderRadius: 'var(--radius-sm)',
-                    padding: '14px',
-                    marginBottom: '14px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid var(--glass-border)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '16px',
+                    marginBottom: '16px',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '10px',
+                    gap: '12px',
                   }}
                 >
                   <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '10px' }}>
@@ -250,9 +251,9 @@ export const WorkspaceView: React.FC<Props> = ({
                 </form>
               )}
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {current.immediate_containment.length === 0 ? (
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.82rem', padding: '12px 0' }}>
+                  <div style={{ color: 'var(--text-dim)', fontSize: '0.84rem', padding: '12px 0' }}>
                     No immediate containment actions recorded.
                   </div>
                 ) : (
@@ -260,21 +261,22 @@ export const WorkspaceView: React.FC<Props> = ({
                     <div
                       key={idx}
                       style={{
-                        background: 'var(--bg-elevated)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: 'var(--radius-sm)',
-                        padding: '10px 14px',
+                        background: 'rgba(255, 255, 255, 0.04)',
+                        border: '1px solid var(--glass-border)',
+                        borderRadius: 'var(--radius-md)',
+                        padding: '12px 16px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <button
                           className="btn-icon"
                           style={{
                             color: c.verified ? 'var(--success-text)' : 'var(--text-muted)',
                             background: c.verified ? 'var(--success-bg)' : 'transparent',
+                            borderColor: c.verified ? 'var(--success-border)' : 'var(--glass-border)',
                           }}
                           onClick={() => dispatch(toggleContainmentVerified(idx))}
                           title={c.verified ? 'Verified Active' : 'Click to Verify'}
@@ -285,7 +287,7 @@ export const WorkspaceView: React.FC<Props> = ({
                           <span className="badge badge-neutral" style={{ marginRight: '8px' }}>
                             {c.action_type || 'Containment'}
                           </span>
-                          <span style={{ fontSize: '0.84rem', color: '#ffffff' }}>{c.description}</span>
+                          <span style={{ fontSize: '0.86rem', color: '#ffffff' }}>{c.description}</span>
                         </div>
                       </div>
 

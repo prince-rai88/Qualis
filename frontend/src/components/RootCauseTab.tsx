@@ -50,10 +50,8 @@ export const RootCauseTab: React.FC = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Top Controls & View Selector */}
       <div
+        className="ws-card"
         style={{
-          background: 'rgba(30, 41, 59, 0.4)',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-md)',
           padding: '14px 20px',
           display: 'flex',
           alignItems: 'center',
@@ -61,32 +59,29 @@ export const RootCauseTab: React.FC = () => {
         }}
       >
         <div>
-          <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-main)' }}>
+          <div style={{ fontSize: '0.98rem', fontWeight: 700, color: '#ffffff' }}>
             Root Cause Investigation Framework
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             Investigate causal pathways using 5 Whys causal interrogation and Ishikawa 6M classification
           </div>
         </div>
 
-        <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.6)', padding: '3px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }}>
+        <div className="input-modes">
           <button
-            className={`btn-icon ${approachView === 'both' ? 'active' : ''}`}
-            style={{ padding: '6px 12px', fontSize: '0.78rem', background: approachView === 'both' ? '#334155' : 'transparent', color: approachView === 'both' ? '#ffffff' : 'var(--text-muted)' }}
+            className={`mode-btn ${approachView === 'both' ? 'active' : ''}`}
             onClick={() => setApproachView('both')}
           >
             View Both
           </button>
           <button
-            className={`btn-icon ${approachView === 'five_whys' ? 'active' : ''}`}
-            style={{ padding: '6px 12px', fontSize: '0.78rem', background: approachView === 'five_whys' ? '#334155' : 'transparent', color: approachView === 'five_whys' ? '#ffffff' : 'var(--text-muted)' }}
+            className={`mode-btn ${approachView === 'five_whys' ? 'active' : ''}`}
             onClick={() => setApproachView('five_whys')}
           >
-            5 Whys Tree
+            5 Whys Chain
           </button>
           <button
-            className={`btn-icon ${approachView === 'fishbone' ? 'active' : ''}`}
-            style={{ padding: '6px 12px', fontSize: '0.78rem', background: approachView === 'fishbone' ? '#334155' : 'transparent', color: approachView === 'fishbone' ? '#ffffff' : 'var(--text-muted)' }}
+            className={`mode-btn ${approachView === 'fishbone' ? 'active' : ''}`}
             onClick={() => setApproachView('fishbone')}
           >
             Ishikawa 6M
@@ -96,46 +91,52 @@ export const RootCauseTab: React.FC = () => {
 
       {/* Primary Suspected Root Cause Summary Card */}
       <div
+        className="ws-card"
         style={{
-          background: 'rgba(239, 68, 68, 0.06)',
-          border: '1px solid rgba(239, 68, 68, 0.35)',
-          borderRadius: 'var(--radius-md)',
-          padding: '20px',
+          background: 'rgba(244, 63, 94, 0.07)',
+          borderColor: 'var(--critical-border)',
+          boxShadow: '0 0 30px rgba(244, 63, 94, 0.12), var(--glass-shadow)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f87171', fontWeight: 700, fontSize: '0.9rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--critical-text)', fontWeight: 700, fontSize: '0.9rem' }}>
             <AlertOctagon size={18} />
-            <span>Concluded Primary Systemic Root Cause</span>
-            <span className="badge badge-ai" style={{ fontSize: '0.68rem' }}>AI Suggested / Review</span>
+            <span>Concluded Primary Systemic Root Cause (ICH Q7 § 12.2)</span>
           </div>
+          <span className="badge badge-critical" style={{ fontSize: '0.7rem' }}>Verified Causal Driver</span>
         </div>
 
         <textarea
-          className="textarea-clean"
+          className="form-input"
           rows={2}
-          style={{ background: 'rgba(15, 23, 42, 0.8)', borderColor: 'rgba(239, 68, 68, 0.4)' }}
+          style={{
+            width: '100%',
+            background: 'rgba(0, 0, 0, 0.25)',
+            borderColor: 'var(--critical-border)',
+            color: '#ffffff',
+            fontSize: '0.92rem',
+            lineHeight: '1.5',
+            resize: 'vertical',
+          }}
           value={current.suspected_root_cause}
           onChange={(e) => dispatch(updateFormField({ field: 'suspected_root_cause', value: e.target.value }))}
           placeholder="Systemic root cause identified through 5 Whys and physical evidence..."
         />
 
         {current.contributing_factors.length > 0 && (
-          <div style={{ marginTop: '12px' }}>
-            <div style={{ fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '6px' }}>
+          <div style={{ marginTop: '14px' }}>
+            <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px' }}>
               Contributing Factors (Secondary Causal Catalysts):
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {current.contributing_factors.map((factor, i) => (
                 <span
                   key={i}
+                  className="badge badge-neutral"
                   style={{
-                    background: 'rgba(30, 41, 59, 0.8)',
-                    border: '1px solid var(--border-medium)',
-                    color: '#e2e8f0',
-                    fontSize: '0.78rem',
+                    fontSize: '0.76rem',
                     padding: '4px 10px',
-                    borderRadius: '6px',
+                    color: 'var(--text-secondary)',
                   }}
                 >
                   • {factor}
@@ -148,30 +149,30 @@ export const RootCauseTab: React.FC = () => {
 
       {/* 5 Whys Progression Tree */}
       {(approachView === 'both' || approachView === 'five_whys') && (
-        <div className="form-card">
-          <div className="card-title-bar">
-            <div className="card-title">
+        <div className="ws-card">
+          <div className="ws-card-header">
+            <div className="ws-card-title">
               <GitCommit size={18} color="#818cf8" />
               <span>5 Whys Root Cause Interrogation Chain</span>
             </div>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
-              Transitions from physical symptom down to management / preventive failure
+              Transitions from physical symptom down to systemic management failure
             </span>
           </div>
 
           {current.five_whys_data.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '32px', color: 'var(--text-dim)', fontSize: '0.85rem' }}>
-              No 5 Whys analysis loaded yet. Use the AI Copilot to generate the causal chain from your incident report.
+            <div style={{ textAlign: 'center', padding: '36px', color: 'var(--text-dim)', fontSize: '0.86rem' }}>
+              No 5 Whys analysis loaded yet. Describe the deviation or load a preset on the home screen.
             </div>
           ) : (
-            <div className="five-whys-container">
+            <div className="whys-chain">
               {current.five_whys_data.map((step, idx) => (
-                <div key={step.step} className={`why-step-card ${step.is_root_cause ? 'is-root-cause' : ''}`}>
-                  <div className="why-step-number">{step.step}</div>
+                <div key={step.step} className={`why-row ${step.is_root_cause ? 'root-cause-row' : ''}`}>
+                  <div className="why-badge-num">{step.step}</div>
 
-                  <div className="why-step-content">
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <div className="why-question">Why {step.step}: {step.question}</div>
+                  <div className="why-content">
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+                      <div className="why-q">Why {step.step}: {step.question}</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         {step.is_root_cause && (
                           <span className="badge badge-critical">Root Cause</span>
@@ -179,34 +180,35 @@ export const RootCauseTab: React.FC = () => {
                         <button
                           className="btn btn-secondary btn-sm"
                           style={{
-                            padding: '3px 8px',
-                            fontSize: '0.7rem',
-                            color: step.confirmed ? '#34d399' : 'var(--text-muted)',
+                            padding: '3px 10px',
+                            fontSize: '0.72rem',
+                            color: step.confirmed ? 'var(--success-text)' : 'var(--text-muted)',
                             borderColor: step.confirmed ? 'var(--success-border)' : undefined,
+                            background: step.confirmed ? 'var(--success-bg)' : undefined,
                           }}
                           onClick={() =>
                             dispatch(updateFiveWhyStep({ index: idx, field: 'confirmed', value: !step.confirmed }))
                           }
                         >
                           <ShieldCheck size={13} />
-                          {step.confirmed ? 'Confirmed by Investigator' : 'Confirm Step'}
+                          {step.confirmed ? 'Confirmed' : 'Verify'}
                         </button>
                       </div>
                     </div>
 
                     <input
                       type="text"
-                      className="form-input"
-                      style={{ fontSize: '0.86rem', padding: '8px 10px' }}
+                      className="why-a-input"
                       value={step.answer}
                       onChange={(e) =>
                         dispatch(updateFiveWhyStep({ index: idx, field: 'answer', value: e.target.value }))
                       }
+                      placeholder="Investigator answer..."
                     />
 
                     {step.evidence && (
-                      <div className="why-evidence-snippet">
-                        <strong>Evidence Snippet:</strong> {step.evidence}
+                      <div className="why-evidence">
+                        <strong>Evidence:</strong> {step.evidence}
                       </div>
                     )}
                   </div>
@@ -219,9 +221,9 @@ export const RootCauseTab: React.FC = () => {
 
       {/* Ishikawa (Fishbone) 6M Analysis Visual Grid */}
       {(approachView === 'both' || approachView === 'fishbone') && (
-        <div className="form-card">
-          <div className="card-title-bar">
-            <div className="card-title">
+        <div className="ws-card">
+          <div className="ws-card-header">
+            <div className="ws-card-title">
               <Network size={18} color="#38bdf8" />
               <span>Ishikawa 6M Cause-and-Effect Fishbone Matrix</span>
             </div>
@@ -236,20 +238,20 @@ export const RootCauseTab: React.FC = () => {
 
               return (
                 <div key={key} className="fishbone-branch-card">
-                  <div className="branch-title">
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '7px', fontWeight: 600, fontSize: '0.84rem', color: '#ffffff' }}>
                       <span>{icon}</span>
                       <span>{label}</span>
                     </span>
-                    <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>
-                      {causes.length} factors
+                    <span className="badge badge-neutral" style={{ fontSize: '0.66rem' }}>
+                      {causes.length}
                     </span>
                   </div>
-                  <div style={{ fontSize: '0.68rem', color: 'var(--text-dim)' }}>{description}</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>{description}</div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '6px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '4px' }}>
                     {causes.length === 0 ? (
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', fontStyle: 'italic', padding: '8px' }}>
+                      <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)', fontStyle: 'italic', padding: '12px 6px', textAlign: 'center' }}>
                         No factors identified in this branch
                       </div>
                     ) : (
@@ -269,7 +271,7 @@ export const RootCauseTab: React.FC = () => {
                                 </span>
                               )}
                               {cause.investigator_confirmed ? (
-                                <span style={{ color: '#34d399' }} title="Investigator Confirmed">
+                                <span style={{ color: 'var(--success-text)' }} title="Investigator Confirmed">
                                   <CheckCircle size={14} />
                                 </span>
                               ) : (
@@ -280,12 +282,12 @@ export const RootCauseTab: React.FC = () => {
                             </div>
                           </div>
 
-                          <div style={{ fontSize: '0.78rem', color: '#f1f5f9', lineHeight: '1.4' }}>
+                          <div style={{ fontSize: '0.8rem', color: '#f1f5f9', lineHeight: '1.4' }}>
                             {cause.text}
                           </div>
 
                           {cause.evidence && (
-                            <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontStyle: 'italic', background: 'rgba(0,0,0,0.2)', padding: '4px 6px', borderRadius: '4px' }}>
+                            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontStyle: 'italic', background: 'rgba(0,0,0,0.25)', padding: '5px 8px', borderRadius: '4px' }}>
                               Evid: {cause.evidence}
                             </div>
                           )}

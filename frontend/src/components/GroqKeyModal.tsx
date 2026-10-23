@@ -39,12 +39,12 @@ export const GroqKeyModal: React.FC<Props> = ({ isOpen, onClose }) => {
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ background: 'rgba(99, 102, 241, 0.2)', padding: '8px', borderRadius: '8px', color: '#818cf8' }}>
+            <div style={{ background: 'var(--accent-subtle)', border: '1px solid var(--accent)', padding: '8px', borderRadius: '8px', color: 'var(--accent-light)' }}>
               <Key size={20} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)' }}>Groq AI LLM Settings</h3>
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Configure your Groq API credentials for live inference</p>
+              <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>Groq AI LLM Settings</h3>
+              <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Configure your Groq API credentials for live inference</p>
             </div>
           </div>
           <button className="btn-icon" onClick={onClose}><X size={18} /></button>

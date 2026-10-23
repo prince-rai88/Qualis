@@ -30,6 +30,13 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="app-container">
+      {/* Apple visionOS Ambient Volumetric Lighting Canvas */}
+      <div className="ambient-volumetric-orbs" aria-hidden="true">
+        <div className="orb-indigo" />
+        <div className="orb-cyan" />
+        <div className="orb-violet" />
+      </div>
+
       {/* Minimal Top Navigation */}
       <Navbar
         onOpenGroqModal={() => setIsGroqModalOpen(true)}
