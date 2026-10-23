@@ -201,7 +201,7 @@ export const AICopilotPanel: React.FC = () => {
   const handleApplyGaps = () => {
     if (aiMissingEvidence) {
       dispatch(setMissingEvidence(aiMissingEvidence));
-      dispatch(setActiveTab('evidence_gaps'));
+      dispatch(setActiveTab('evidence'));
     }
   };
 

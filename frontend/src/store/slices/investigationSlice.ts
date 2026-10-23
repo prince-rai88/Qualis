@@ -45,8 +45,8 @@ interface InvestigationState {
   saving: boolean;
   error: string | null;
   saveSuccessMessage: string | null;
-  activeTab: 'details' | 'root_cause' | 'evidence_gaps' | 'capa' | 'qp_signoff';
-  viewMode: 'split' | 'form_only' | 'copilot_only';
+  activeTab: 'overview' | 'root_cause' | 'evidence' | 'capa';
+  currentView: 'home' | 'processing' | 'workspace';
 }
 
 const initialState: InvestigationState = {
@@ -58,8 +58,8 @@ const initialState: InvestigationState = {
   saving: false,
   error: null,
   saveSuccessMessage: null,
-  activeTab: 'details',
-  viewMode: 'split',
+  activeTab: 'overview',
+  currentView: 'home',
 };
 
 export const fetchInvestigations = createAsyncThunk(
@@ -118,14 +118,21 @@ const investigationSlice = createSlice({
         deviation_number: 'DEV-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000),
       };
       state.activeId = null;
-      state.activeTab = 'details';
+      state.activeTab = 'overview';
+      state.currentView = 'home';
       state.saveSuccessMessage = null;
+    },
+    setCurrentView(state, action: PayloadAction<'home' | 'processing' | 'workspace'>) {
+      state.currentView = action.payload;
+    },
+    openInvestigation(state, action: PayloadAction<Investigation>) {
+      state.current = action.payload;
+      state.activeId = action.payload.id || null;
+      state.currentView = 'workspace';
+      state.activeTab = 'overview';
     },
     setActiveTab(state, action: PayloadAction<InvestigationState['activeTab']>) {
       state.activeTab = action.payload;
-    },
-    setViewMode(state, action: PayloadAction<InvestigationState['viewMode']>) {
-      state.viewMode = action.payload;
     },
     updateFormField<K extends keyof Investigation>(
       state: InvestigationState,
@@ -217,10 +224,6 @@ const investigationSlice = createSlice({
       .addCase(fetchInvestigations.fulfilled, (state, action) => {
         state.loadingList = false;
         state.list = action.payload;
-        if (!state.current.id && action.payload.length > 0 && !state.activeId) {
-          state.current = action.payload[0];
-          state.activeId = action.payload[0].id || null;
-        }
       })
       .addCase(fetchInvestigations.rejected, (state, action) => {
         state.loadingList = false;
@@ -234,6 +237,8 @@ const investigationSlice = createSlice({
         state.loadingDetail = false;
         state.current = action.payload;
         state.activeId = action.payload.id || null;
+        state.currentView = 'workspace';
+        state.activeTab = 'overview';
       })
       .addCase(fetchInvestigationById.rejected, (state, action) => {
         state.loadingDetail = false;
@@ -286,8 +291,9 @@ const investigationSlice = createSlice({
 
 export const {
   startNewInvestigation,
+  setCurrentView,
+  openInvestigation,
   setActiveTab,
-  setViewMode,
   updateFormField,
   addContainmentAction,
   removeContainmentAction,
