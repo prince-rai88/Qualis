@@ -76,7 +76,7 @@ export const ProcessingView: React.FC = () => {
         <span className="badge badge-neutral" style={{ alignSelf: 'center', marginBottom: '4px' }}>
           {current.deviation_number || 'DEV-2026-PROCESSING'}
         </span>
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#ffffff' }}>
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)' }}>
           Investigating Incident
         </h2>
         <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>

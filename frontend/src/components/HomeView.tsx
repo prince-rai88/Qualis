@@ -157,7 +157,7 @@ export const HomeView: React.FC = () => {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  background: 'rgba(99, 102, 241, 0.1)',
+                  background: 'var(--accent-subtle)',
                   color: 'var(--accent-text)',
                   padding: '3px 8px',
                   borderRadius: '4px',

@@ -55,7 +55,7 @@ export const QPSignoffModal: React.FC<Props> = ({ isOpen, onClose }) => {
               <ShieldCheck size={22} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 Qualified Person (QP) Electronic Sign-Off
               </h3>
               <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)' }}>
@@ -71,7 +71,7 @@ export const QPSignoffModal: React.FC<Props> = ({ isOpen, onClose }) => {
             style={{
               padding: '14px 16px',
               borderRadius: 'var(--radius-md)',
-              background: 'rgba(255, 255, 255, 0.04)',
+              background: 'var(--canvas-elevated)',
               border: '1px solid var(--glass-border)',
               fontSize: '0.82rem',
               display: 'flex',
@@ -81,11 +81,11 @@ export const QPSignoffModal: React.FC<Props> = ({ isOpen, onClose }) => {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-dim)' }}>
               <span>Deviation ID:</span>
-              <strong style={{ color: '#ffffff' }}>{current.deviation_number}</strong>
+              <strong style={{ color: 'var(--text-primary)' }}>{current.deviation_number}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-dim)' }}>
               <span>Product & Batch:</span>
-              <strong style={{ color: '#ffffff' }}>{current.product_name} ({current.batch_number})</strong>
+              <strong style={{ color: 'var(--text-primary)' }}>{current.product_name} ({current.batch_number})</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-dim)' }}>
               <span>Verified Root Cause:</span>

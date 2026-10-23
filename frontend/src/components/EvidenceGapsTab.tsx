@@ -63,7 +63,7 @@ export const EvidenceGapsTab: React.FC = () => {
             <ShieldAlert size={22} />
           </div>
           <div>
-            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>
+            <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>
               Missing Evidence & Regulatory Audit Trail Gaps
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
@@ -97,7 +97,7 @@ export const EvidenceGapsTab: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             gap: '14px',
-            background: 'rgba(25, 34, 58, 0.7)',
+            background: 'var(--canvas-elevated)',
           }}
         >
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '12px' }}>
@@ -159,7 +159,7 @@ export const EvidenceGapsTab: React.FC = () => {
       <div className="ws-card">
         <div className="ws-card-header">
           <div className="ws-card-title">
-            <FileCheck2 size={18} color="#f59e0b" />
+            <FileCheck2 size={18} color="var(--accent)" />
             <span>Investigation Evidence Registry</span>
           </div>
           <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
@@ -181,11 +181,8 @@ export const EvidenceGapsTab: React.FC = () => {
                 <div
                   key={gap.id}
                   style={{
-                    background: isProvided ? 'var(--success-bg)' : 'rgba(255, 255, 255, 0.04)',
-                    backdropFilter: 'var(--glass-blur)',
-                    WebkitBackdropFilter: 'var(--glass-blur)',
+                    background: isProvided ? 'var(--success-bg)' : 'var(--canvas-surface)',
                     border: `1px solid ${isProvided ? 'var(--success-border)' : 'var(--glass-border)'}`,
-                    borderTop: `1px solid ${isProvided ? 'var(--success-border)' : 'var(--glass-border-top)'}`,
                     borderRadius: 'var(--radius-md)',
                     padding: '16px 20px',
                     display: 'flex',
@@ -193,6 +190,7 @@ export const EvidenceGapsTab: React.FC = () => {
                     justifyContent: 'space-between',
                     gap: '16px',
                     transition: 'all 0.2s ease',
+                    boxShadow: 'var(--glass-shadow-sm)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', flex: 1 }}>
@@ -214,7 +212,7 @@ export const EvidenceGapsTab: React.FC = () => {
                         <span className={`badge badge-${gap.priority.toLowerCase()}`}>
                           {gap.priority} Priority
                         </span>
-                        <strong style={{ fontSize: '0.9rem', color: '#ffffff' }}>{gap.item}</strong>
+                        <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>{gap.item}</strong>
                       </div>
 
                       <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
@@ -233,7 +231,7 @@ export const EvidenceGapsTab: React.FC = () => {
                     <button
                       className="btn btn-sm"
                       style={{
-                        background: isProvided ? 'var(--success-bg)' : 'rgba(255, 255, 255, 0.06)',
+                        background: isProvided ? 'var(--success-bg)' : 'var(--canvas-elevated)',
                         color: isProvided ? 'var(--success-text)' : 'var(--text-secondary)',
                         borderColor: isProvided ? 'var(--success-border)' : 'var(--glass-border)',
                         fontSize: '0.74rem',
@@ -248,8 +246,8 @@ export const EvidenceGapsTab: React.FC = () => {
                     <button
                       className="btn btn-sm"
                       style={{
-                        background: gap.status === 'Waived' ? 'rgba(148, 163, 184, 0.2)' : 'transparent',
-                        color: gap.status === 'Waived' ? '#cbd5e1' : 'var(--text-dim)',
+                        background: gap.status === 'Waived' ? 'rgba(148, 163, 184, 0.15)' : 'transparent',
+                        color: gap.status === 'Waived' ? 'var(--text-secondary)' : 'var(--text-dim)',
                         borderColor: 'var(--glass-border)',
                         fontSize: '0.74rem',
                       }}

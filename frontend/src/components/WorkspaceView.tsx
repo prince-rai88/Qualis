@@ -135,9 +135,9 @@ export const WorkspaceView: React.FC<Props> = ({
             <div
               className="ws-card"
               style={{
-                background: 'rgba(244, 63, 94, 0.07)',
+                background: 'var(--critical-bg)',
                 borderColor: 'var(--critical-border)',
-                boxShadow: '0 0 30px rgba(244, 63, 94, 0.12), var(--glass-shadow)',
+                boxShadow: 'var(--glass-shadow)',
                 padding: '20px 24px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -148,7 +148,7 @@ export const WorkspaceView: React.FC<Props> = ({
                 <AlertOctagon size={16} />
                 <span>Primary Systemic Root Cause (ICH Q7 § 12.2)</span>
               </div>
-              <p style={{ fontSize: '0.94rem', color: '#ffffff', lineHeight: '1.6' }}>
+              <p style={{ fontSize: '0.94rem', color: 'var(--text-primary)', lineHeight: '1.6' }}>
                 {current.suspected_root_cause || 'Root cause investigation in progress.'}
               </p>
             </div>
@@ -287,7 +287,7 @@ export const WorkspaceView: React.FC<Props> = ({
                           <span className="badge badge-neutral" style={{ marginRight: '8px' }}>
                             {c.action_type || 'Containment'}
                           </span>
-                          <span style={{ fontSize: '0.86rem', color: '#ffffff' }}>{c.description}</span>
+                          <span style={{ fontSize: '0.86rem', color: 'var(--text-primary)' }}>{c.description}</span>
                         </div>
                       </div>
 
@@ -323,7 +323,7 @@ export const WorkspaceView: React.FC<Props> = ({
           <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-header">
               <div>
-                <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff' }}>Incident Details</h3>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Incident Details</h3>
                 <p style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>Edit underlying GMP deviation metadata</p>
               </div>
               <button className="btn-icon" onClick={() => setIsDetailsDrawerOpen(false)}>

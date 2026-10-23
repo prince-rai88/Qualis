@@ -59,7 +59,7 @@ export const RootCauseTab: React.FC = () => {
         }}
       >
         <div>
-          <div style={{ fontSize: '0.98rem', fontWeight: 700, color: '#ffffff' }}>
+          <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--text-primary)' }}>
             Root Cause Investigation Framework
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
@@ -93,9 +93,9 @@ export const RootCauseTab: React.FC = () => {
       <div
         className="ws-card"
         style={{
-          background: 'rgba(244, 63, 94, 0.07)',
+          background: 'var(--critical-bg)',
           borderColor: 'var(--critical-border)',
-          boxShadow: '0 0 30px rgba(244, 63, 94, 0.12), var(--glass-shadow)',
+          boxShadow: 'var(--glass-shadow)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
@@ -111,9 +111,9 @@ export const RootCauseTab: React.FC = () => {
           rows={2}
           style={{
             width: '100%',
-            background: 'rgba(0, 0, 0, 0.25)',
+            background: 'var(--canvas-surface)',
             borderColor: 'var(--critical-border)',
-            color: '#ffffff',
+            color: 'var(--text-primary)',
             fontSize: '0.92rem',
             lineHeight: '1.5',
             resize: 'vertical',
@@ -125,7 +125,7 @@ export const RootCauseTab: React.FC = () => {
 
         {current.contributing_factors.length > 0 && (
           <div style={{ marginTop: '14px' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px' }}>
+            <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px' }}>
               Contributing Factors (Secondary Causal Catalysts):
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -152,7 +152,7 @@ export const RootCauseTab: React.FC = () => {
         <div className="ws-card">
           <div className="ws-card-header">
             <div className="ws-card-title">
-              <GitCommit size={18} color="#818cf8" />
+              <GitCommit size={18} color="var(--accent)" />
               <span>5 Whys Root Cause Interrogation Chain</span>
             </div>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
@@ -224,7 +224,7 @@ export const RootCauseTab: React.FC = () => {
         <div className="ws-card">
           <div className="ws-card-header">
             <div className="ws-card-title">
-              <Network size={18} color="#38bdf8" />
+              <Network size={18} color="var(--sage)" />
               <span>Ishikawa 6M Cause-and-Effect Fishbone Matrix</span>
             </div>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
@@ -239,7 +239,7 @@ export const RootCauseTab: React.FC = () => {
               return (
                 <div key={key} className="fishbone-branch-card">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '7px', fontWeight: 600, fontSize: '0.84rem', color: '#ffffff' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '7px', fontWeight: 700, fontSize: '0.84rem', color: 'var(--text-primary)' }}>
                       <span>{icon}</span>
                       <span>{label}</span>
                     </span>
@@ -247,7 +247,7 @@ export const RootCauseTab: React.FC = () => {
                       {causes.length}
                     </span>
                   </div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>{description}</div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{description}</div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '4px' }}>
                     {causes.length === 0 ? (
@@ -282,12 +282,12 @@ export const RootCauseTab: React.FC = () => {
                             </div>
                           </div>
 
-                          <div style={{ fontSize: '0.8rem', color: '#f1f5f9', lineHeight: '1.4' }}>
+                          <div style={{ fontSize: '0.82rem', color: 'var(--text-primary)', lineHeight: '1.45' }}>
                             {cause.text}
                           </div>
 
                           {cause.evidence && (
-                            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontStyle: 'italic', background: 'rgba(0,0,0,0.25)', padding: '5px 8px', borderRadius: '4px' }}>
+                            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontStyle: 'italic', background: 'rgba(28, 25, 23, 0.05)', padding: '5px 8px', borderRadius: '4px' }}>
                               Evid: {cause.evidence}
                             </div>
                           )}

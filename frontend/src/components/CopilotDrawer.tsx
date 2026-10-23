@@ -32,7 +32,7 @@ export const CopilotDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
               <Sparkles size={16} />
             </div>
             <div>
-              <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#ffffff' }}>Quality Copilot</h3>
+              <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)' }}>Quality Copilot</h3>
               <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>ICH Q7, Q10 & 21 CFR guidance</p>
             </div>
           </div>
