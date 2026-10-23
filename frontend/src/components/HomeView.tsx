@@ -18,15 +18,17 @@ import {
 } from '../store/slices/investigationSlice';
 import {
   ArrowRight,
-  Upload,
   FileText,
   Mail,
   Sparkles,
   Paperclip,
   X,
-  FileCheck2,
+  Zap,
+  Shield,
+  GitBranch,
   Clock,
-  Layers,
+  ChevronRight,
+  Database,
 } from 'lucide-react';
 import { Investigation } from '../types';
 
@@ -96,14 +98,50 @@ export const HomeView: React.FC = () => {
     }
   };
 
+  // Helper metadata for presets
+  const getPresetMeta = (index: number) => {
+    const meta = [
+      { tag: 'API Fermentation', batch: 'Batch #PAR-2024-089', severity: 'critical' },
+      { tag: 'Solvent Recovery', batch: 'Batch #AMX-2024-042', severity: 'major' },
+      { tag: 'Fluidized Drying', batch: 'Batch #MET-2024-118', severity: 'minor' },
+    ];
+    return meta[index] || { tag: 'Active Synthesis', batch: 'Batch #API-GEN', severity: 'major' };
+  };
+
   return (
     <div className="home-container">
       {/* Central Hero Heading */}
       <div className="home-hero">
+        <div className="hero-eyebrow-chip">
+          <span className="pulse-dot" />
+          <span>QUALIS INTELLIGENCE CORE v2.4 • cGMP 21 CFR PART 11</span>
+        </div>
+
         <h1 className="home-headline">What happened in this batch?</h1>
+
         <p className="home-subhead">
-          AI-assisted Root Cause Analysis and CAPA management for active pharmaceutical ingredient manufacturing.
+          Autonomous AI-assisted Root Cause Analysis and CAPA management engineered for Active Pharmaceutical Ingredient (API) manufacturing.
         </p>
+
+        {/* High-Tech Capabilities Ribbon */}
+        <div className="features-ribbon">
+          <div className="feature-pill">
+            <Zap size={13} style={{ color: '#2997ff' }} />
+            <span>5-Stage LangGraph AI</span>
+          </div>
+          <div className="feature-pill">
+            <Shield size={13} style={{ color: '#30d158' }} />
+            <span>ICH Q9 / Q10 Compliant</span>
+          </div>
+          <div className="feature-pill">
+            <GitBranch size={13} style={{ color: '#bf5af2' }} />
+            <span>6M Ishikawa Matrix</span>
+          </div>
+          <div className="feature-pill">
+            <Clock size={13} style={{ color: '#ff9f0a' }} />
+            <span>Autonomous Synthesis</span>
+          </div>
+        </div>
       </div>
 
       {/* Primary Multiline Investigation Input Box */}
@@ -131,7 +169,7 @@ export const HomeView: React.FC = () => {
               className={`mode-btn ${sourceType === 'text' ? 'active' : ''}`}
               onClick={() => dispatch(setSourceType('text'))}
             >
-              <FileText size={13} /> Text
+              <FileText size={13} /> Text Narrative
             </button>
 
             <button
@@ -141,7 +179,7 @@ export const HomeView: React.FC = () => {
                 fileInputRef.current?.click();
               }}
             >
-              <Paperclip size={13} /> Upload Document (PDF)
+              <Paperclip size={13} /> PDF Document
             </button>
 
             <button
@@ -174,43 +212,75 @@ export const HomeView: React.FC = () => {
             )}
           </div>
 
-          <button
-            className="btn btn-primary"
-            onClick={handleStartInvestigation}
-            disabled={!rawInputText.trim() || isProcessing}
-          >
-            <span>Start investigation</span>
-            <ArrowRight size={14} />
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+              {rawInputText.length > 0 ? `${rawInputText.length} characters` : 'Ready for input'}
+            </span>
+
+            <button
+              className="btn btn-primary"
+              onClick={handleStartInvestigation}
+              disabled={!rawInputText.trim() || isProcessing}
+            >
+              <Sparkles size={14} />
+              <span>Synthesize RCA</span>
+              <ArrowRight size={14} />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Try a Sample Investigation */}
       <div className="samples-section">
-        <div className="section-label">Try a sample investigation</div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div className="section-label">Try a verified benchmark investigation</div>
+          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Click to auto-populate</span>
+        </div>
+
         <div className="samples-grid">
-          {presets.map((preset) => (
-            <div
-              key={preset.id}
-              className="sample-card"
-              onClick={() => handleSelectPreset(preset.id)}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span className="sample-card-title">{preset.product}</span>
-                <span className="badge badge-neutral" style={{ fontSize: '0.65rem' }}>Sample</span>
+          {presets.map((preset, idx) => {
+            const meta = getPresetMeta(idx);
+            return (
+              <div
+                key={preset.id}
+                className="sample-card"
+                onClick={() => handleSelectPreset(preset.id)}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span className={`badge badge-${meta.severity}`}>
+                    {meta.severity.toUpperCase()}
+                  </span>
+                  <span style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+                    {meta.batch}
+                  </span>
+                </div>
+
+                <div>
+                  <h4 className="sample-card-title">{preset.product}</h4>
+                  <div style={{ fontSize: '0.72rem', color: '#5ac8fa', marginTop: '2px' }}>
+                    {meta.tag}
+                  </div>
+                </div>
+
+                <p className="sample-card-desc">{preset.description}</p>
+
+                <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '4px', color: '#5ac8fa', fontSize: '0.75rem', fontWeight: 500 }}>
+                  <span>Load scenario</span>
+                  <ChevronRight size={13} />
+                </div>
               </div>
-              <p className="sample-card-desc">{preset.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* Recent Investigations List (Secondary Section) */}
+      {/* Recent Investigations List */}
       <div className="recent-section">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div className="section-label">Recent Investigations</div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-            {list.length} saved in database
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+            <Database size={13} />
+            {list.length} saved in PostgreSQL
           </span>
         </div>
 
@@ -225,8 +295,8 @@ export const HomeView: React.FC = () => {
           </div>
 
           {list.length === 0 ? (
-            <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-              No recent investigations recorded.
+            <div style={{ padding: '28px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
+              No recent investigations recorded in PostgreSQL database.
             </div>
           ) : (
             list.map((inv) => (
@@ -235,11 +305,11 @@ export const HomeView: React.FC = () => {
                 className="recent-row"
                 onClick={() => handleOpenExisting(inv)}
               >
-                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, color: '#ffffff' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, color: '#5ac8fa' }}>
                   {inv.deviation_number}
                 </div>
                 <div>
-                  <div style={{ fontWeight: 600 }}>{inv.product_name}</div>
+                  <div style={{ fontWeight: 600, color: '#ffffff' }}>{inv.product_name}</div>
                   <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{inv.batch_number}</div>
                 </div>
                 <div style={{ color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -256,8 +326,8 @@ export const HomeView: React.FC = () => {
                   </span>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--accent-text)', fontSize: '0.76rem', fontWeight: 500 }}>
-                    Open →
+                  <span style={{ color: '#5ac8fa', fontSize: '0.76rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '2px' }}>
+                    Open <ChevronRight size={12} />
                   </span>
                 </div>
               </div>

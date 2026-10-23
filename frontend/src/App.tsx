@@ -30,11 +30,11 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="app-container">
-      {/* Swiss Ceramic & Burnt Copper Ambient Volumetric Lighting Canvas */}
+      {/* Apple Pro OLED Spatial Ambient Lights */}
       <div className="ambient-volumetric-orbs" aria-hidden="true">
-        <div className="orb-copper" />
-        <div className="orb-sage" />
-        <div className="orb-honey" />
+        <div className="orb-indigo" />
+        <div className="orb-cyan" />
+        <div className="orb-violet" />
       </div>
 
       {/* Minimal Top Navigation */}
